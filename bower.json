@@ -1,0 +1,14 @@
+{
+  "name": "example",
+  "private": true,
+  "dependencies": {
+    "skeleton": "~2.0.4",
+    "angular": "1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "ui-leaflet": "~1.0.0"
+  },
+  "devDependencies": {
+    "chai": "~3.3.0",
+    "mocha": "~2.3.3"
+  }
+}

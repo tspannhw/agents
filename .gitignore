@@ -1,0 +1,9 @@
+node_modules
+dist
+public
+.tmp
+.DS_Store
+.sass-cache
+bower_components
+test/bower_components
+.git
