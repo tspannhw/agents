@@ -6,6 +6,10 @@ public class Agent {
 	private Double lng;
 	private Integer age;
 	private String gender;
+	private String message;
+	private boolean focus;
+	private boolean compileMessage;
+	private boolean draggable;
 	
 	public String getName() {
 		return name;
@@ -36,5 +40,29 @@ public class Agent {
 	}
 	public void setLng(Double lng) {
 		this.lng = lng;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public boolean isFocus() {
+		return focus;
+	}
+	public void setFocus(boolean focus) {
+		this.focus = focus;
+	}
+	public boolean isCompileMessage() {
+		return compileMessage;
+	}
+	public void setCompileMessage(boolean compileMessage) {
+		this.compileMessage = compileMessage;
+	}
+	public boolean isDraggable() {
+		return draggable;
+	}
+	public void setDraggable(boolean draggable) {
+		this.draggable = draggable;
 	}
 }

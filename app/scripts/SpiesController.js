@@ -2,10 +2,12 @@
 
 export default class SpiesController {
 
-  constructor($scope, $http, AgentsService) {
+  constructor($scope, $http, AgentsService, leafletData) {
     this._$scope = $scope;
     this._$http = $http;
-    this.ageFilter = -1;
+    this._leafletData = leafletData;
+    this.ageFilter = 0;
+    this.searchFilter = '';
 
     AgentsService.getAgents()
       .then(result => {
@@ -36,7 +38,7 @@ export default class SpiesController {
     };
 
     this.defaults = {
-      scrollWheelZoom: false
+      scrollWheelZoom: true
     };
 
     angular.extend($scope, {
@@ -46,33 +48,60 @@ export default class SpiesController {
     });
   }
 
-  filterAgentByAge() {
-    let self = this, filteredAgents = {};
+  filterAgents() {
+    let filteredAgents = this.agents;
 
-    if (this.ageFilter === -1) {
-      filteredAgents = this.agents;
-    } else {
-      filteredAgents = this.agents.filter(function(agent) {
-        return agent.age > self.ageFilter;
-      });
-    }
+    // filter down
+    filteredAgents = this.filterAgentByAge(filteredAgents);
+    filteredAgents = this.filterAgentByGender(filteredAgents);
+    filteredAgents = this.searchAgents(filteredAgents);
 
     // update leaflet
     this._$scope.markers = filteredAgents;
   }
 
-  filterAgentByGender() {
-    let self = this, filteredAgents = {};
-    if (this.genderFilter.name === 'None') {
-      filteredAgents = this.agents;
-    } else {
-      filteredAgents = this.agents.filter(function(agent) {
+  searchAgents(filteredAgents) {
+    let self = this,
+      highlightedAgents = [];
+
+    filteredAgents = filteredAgents.filter(agent =>
+      agent.name.toUpperCase().includes(self.searchFilter.toUpperCase()));
+
+
+    // highlight newly filtered
+    // highlightedAgents.forEach(agent => {
+    //   self._leafletData.getMap('agentMap').then(function(map) {
+    //     L.circle([agent.lat, agent.lng], 500, {
+    //       color: 'red',
+    //       fillColor: '#f03',
+    //       fillOpacity: 0.25
+    //     }).addTo(map);
+    //   });
+    // });
+    return filteredAgents;
+  }
+
+  filterAgentByAge(filteredAgents) {
+    let self = this;
+
+    if (this.ageFilter !== 0) {
+      filteredAgents = filteredAgents.filter(function(agent) {
+        return agent.age <= self.ageFilter;
+      });
+    }
+
+    return filteredAgents;
+  }
+
+  filterAgentByGender(filteredAgents) {
+    let self = this;
+    if (this.genderFilter.name !== 'None') {
+      filteredAgents = filteredAgents.filter(function(agent) {
         return agent.gender === self.genderFilter.name;
       });
     }
 
-    // update leaflet
-    this._$scope.markers = filteredAgents;
+    return filteredAgents;
   }
 }
-SpiesController.$inject = ['$scope', '$http', 'AgentsService'];
+SpiesController.$inject = ['$scope', '$http', 'AgentsService', 'leafletData'];

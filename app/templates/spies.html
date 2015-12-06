@@ -1,11 +1,15 @@
 <h2>Spies</h2>
 
-<label for="gender">Gender</label>
-<select name="gender" id="gender" ng-options="option.name for option in vm.genderOptions track by option.name" ng-model="vm.genderFilter" ng-change="vm.filterAgentByGender()"></select>
+<div class="row">
+  <label for="gender">Gender Filter</label>
+  <select name="gender" id="gender" ng-options="option.name for option in vm.genderOptions track by option.name" ng-model="vm.genderFilter" ng-change="vm.filterAgents()"></select>
 
-<label for="age">Age</label>
-<input name="age" id="age" type="text" ng-model="vm.ageFilter" ng-change="vm.filterAgentByAge()" />
+  <label for="age">Maximum</label>
+  <input name="age" id="age" type="text" ng-model="vm.ageFilter" ng-change="vm.filterAgents()" placeholder="0"/>
 
+  <label for="search">Search</label>
+  <input name="search" id="search" type="text" ng-model="vm.searchFilter" ng-change="vm.filterAgents()" placeholder="By Name"/>
+</div>
 <div>
-  <leaflet defaults="defaults" markers="markers" lf-center="center" height="480px" width="640px"></leaflet>
+  <leaflet id="agentMap" defaults="defaults" markers="markers" lf-center="center" height="480px" width="640px"></leaflet>
 </div>
