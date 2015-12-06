@@ -2,9 +2,17 @@
 
 export default class SpiesController {
 
-  constructor($scope, $filter) {
+  constructor($scope, $http, AgentsService) {
     this._$scope = $scope;
-    this._$filter = $filter;
+    this._$http = $http;
+    this.ageFilter = -1;
+
+    AgentsService.getAgents()
+      .then(result => {
+        this.agents = result.data;
+        this._$scope.markers = this.agents;
+      });
+
     this.genderFilter = {
       id: 0,
       name: 'None'
@@ -31,25 +39,26 @@ export default class SpiesController {
       scrollWheelZoom: false
     };
 
-    this.agents = [{
-      name: 'Jilted Seahorse',
-      lat: 34.014908,
-      lng: -118.158966,
-      age: 48,
-      gender: 'Male'
-    }, {
-      name: 'Multitudinous Orphanage',
-      lat: 46.028446,
-      lng: -99.37192,
-      age: 96,
-      gender: 'Female'
-    }];
-
     angular.extend($scope, {
       center: this.center,
       defaults: this.defaults,
       markers: this.agents
     });
+  }
+
+  filterAgentByAge() {
+    let self = this, filteredAgents = {};
+
+    if (this.ageFilter === -1) {
+      filteredAgents = this.agents;
+    } else {
+      filteredAgents = this.agents.filter(function(agent) {
+        return agent.age > self.ageFilter;
+      });
+    }
+
+    // update leaflet
+    this._$scope.markers = filteredAgents;
   }
 
   filterAgentByGender() {
@@ -66,4 +75,4 @@ export default class SpiesController {
     this._$scope.markers = filteredAgents;
   }
 }
-SpiesController.$inject = ['$scope', '$filter'];
+SpiesController.$inject = ['$scope', '$http', 'AgentsService'];

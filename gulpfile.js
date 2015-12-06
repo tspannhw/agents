@@ -90,7 +90,7 @@ gulp.task('html', function() {
 
   return gulp.src('app/*.html')
     .pipe(assets)
-    .pipe($.if('*.js', $.uglify()))
+    // .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
@@ -191,7 +191,7 @@ gulp.task('serve', ['produce'], function() {
   // gulp.watch('app/scripts/**/*.js', ['processSource']);
 });
 
-gulp.task('reload-dev', ['less', 'wiredep', 'fonts', 'processSource'], reload);
+gulp.task('reload-dev', ['produce'], reload);
 
 gulp.task('serve:dist', ['package'], function() {
   browserSync({

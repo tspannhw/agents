@@ -50,6 +50,12 @@
 			<artifactId>jquery</artifactId>
 			<version>2.0.3-1</version>
 		</dependency>
+		<!-- Dev Tools - Supposedly auto restart -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

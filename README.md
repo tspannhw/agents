@@ -3,11 +3,14 @@
 ## How to run
 
 * make sure jre 1.8 is installed
-* unzip
-* start spring boot runner
+* make sure no other processes are listening at localhost:8080
+* copy zip into a command line
+* switch to this directory in a command line
+* unzip and run
 
-
-    java -jar target/crosschx-0.0.1-SNAPSHOT.jar
+		unzip NickCoats-CC.zip
+		
+		java -jar target/crosschx-0.0.1-SNAPSHOT.jar
 
 * open browser to http://localhost:8080
 

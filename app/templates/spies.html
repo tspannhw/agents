@@ -1,9 +1,10 @@
 <h2>Spies</h2>
 
-
-<label for="gender">Filter by gender:</label>
+<label for="gender">Gender</label>
 <select name="gender" id="gender" ng-options="option.name for option in vm.genderOptions track by option.name" ng-model="vm.genderFilter" ng-change="vm.filterAgentByGender()"></select>
 
+<label for="age">Age</label>
+<input name="age" id="age" type="text" ng-model="vm.ageFilter" ng-change="vm.filterAgentByAge()" />
 
 <div>
   <leaflet defaults="defaults" markers="markers" lf-center="center" height="480px" width="640px"></leaflet>
