@@ -1,5 +1,3 @@
-# Cross Chx Code Test
-
 ## How to run
 
 * make sure jre 1.8 is installed
@@ -10,7 +8,7 @@
 
 		unzip NickCoats-CC.zip
 		
-		java -jar target/crosschx-0.0.1-SNAPSHOT.jar
+		java -jar target/app-0.0.1-SNAPSHOT.jar
 
 * open browser to http://localhost:8080
 
